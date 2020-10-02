@@ -6,6 +6,7 @@
       <label>Employee Email</label>
       <input v-model="employee.email" type="text" />
       <button>Add Employee</button>
+      <input v-model="employee.review" type="text" />
     </form>
   </div>
 </template>

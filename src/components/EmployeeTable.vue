@@ -20,6 +20,7 @@
       <td v-else>
       <button @click="editMode(employee.id)">Edit</button>
       <button @click="$emit('', employee.id)">Delete</button>
+      <button @click="$addreview('', employee.id)">addReview</button>     
       </td>
       </tr>
       </tbody>
@@ -43,6 +44,11 @@
     if (employee.name === '' || employee.email === '') return
     this.$emit('edit:employee', employee.id, employee)
     this.editing = null
+  },
+  addreview(employee){
+    if(employee.name === '' || employee.email === '') return
+    this.$addreview('addreview:employee', employee.id, employee)
+    this.editing = null 
   }
   }
   }

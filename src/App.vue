@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="small-container">
     <h1>Employees</h1>
-    <employee-table :employees="employees" @delete:employee="deleteEmployee" @edit:employee="editEmployee"/>
     <employee-form @add:employee="addEmployee" />
+    <employee-table :employees="employees" @delete:employee="deleteEmployee" @edit:employee="editEmployee" @addreview:employee="addReview"/>
   </div>
 </template>
 
@@ -23,16 +23,19 @@ export default {
           id: 1,
           name: 'Richard Hendricks',
           email: 'richard@piedpiper.com',
+          review: '',
         },
         {
           id: 2,
           name: 'Bertram Gilfoyle',
           email: 'gilfoyle@piedpiper.com',
+          review: '',
         },
         {
           id: 3,
           name: 'Dinesh Chugtai',
           email: 'dinesh@piedpiper.com',
+          review: '',   
         },
       ],
     }
@@ -56,10 +59,22 @@ export default {
       employee => employee.id !== id
     )
     },
+    
     editEmployee(id, updatedEmployee) {
     this.employees = this.employees.map(employee =>
     employee.id === id ? updatedEmployee : employee
     )
+   },
+   addReview(id, updatedEmployee){
+    this.employees = this.employees.map(employee =>
+    employee.id === id ? updatedEmployee : employee
+   )
+   },
+   deleteReview(){
+
+   },
+   updateReview(){
+
    },
 //    async getEmployees() {
 //    try {
