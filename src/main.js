@@ -7,35 +7,35 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
-// requireの設定
+const express = require('express');
 const mysql = require('mysql');
 
-// MySQLとのコネクションの作成
+const app = express();
+
 const connection = mysql.createConnection({
-	host : 'localhost',
-	user : 'root',
-	database: 'testdatabase'
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'mysql'
 });
 
-// 接続
-connection.connect();
-
-// userdataの取得
-connection.query('SELECT * from userdata;', function (err, rows, fields) {
-	if (err) { console.log('err: ' + err); } 
-
-	console.log('name: ' + rows[0].name);
-	console.log('id: ' + rows[0].id);
-
+connection.connect((err) => {
+	if (err) {
+    console.log('error connecting:' + err.stack);
+	return;
+	}
+	console.log('success');
 });
 
-// userdataのカラムを取得
-connection.query('SHOW COLUMNS FROM userdata;', function (err, rows, fields) {
-	if (err) { console.log('err: ' + err); }
+  app.get('/', (req, res) => {
+	connection.query(
+	'SELECT * FROM userdata',
+	(error, results) => {
+	console.log(results);
+    res.render('hello.ejs');
+    }
+	);
+  });
 
-	console.log(rows[0].Field);
-	console.log(rows[1].Field);
-});
+  app.listen(3000);
 
-// 接続終了
-connection.end();

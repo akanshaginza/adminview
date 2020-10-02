@@ -6,7 +6,7 @@
       <tbody>
       <tr v-for="employee in employees" :key="employee.id">
       <td v-if="editing === employee.id">
-       <input type="text" v-model="employee.name" />
+      <input type="text" v-model="employee.name" />
       </td>
       <td v-else>{{employee.name}}</td>
       <td v-if="editing === employee.id">
@@ -31,9 +31,10 @@
    name: 'employee-table',
    data() {
     return {
-    editing: null,
+    editing: '',
    }
   },
+  props: ['employees'],
   methods: {
     editMode(id) {
     this.editing = id
